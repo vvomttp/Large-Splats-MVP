@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--
+  Landing page. One prototype left in this copy, so one card.
+
+  Layout, relative to this file:
+      index.html                 ← this page
+      homes/a/index.html         ← residential · multi entry points
+
+  The single-entry card pointed at homes/b/index.html, which was removed from
+  the working tree; the card went with it rather than staying as a dead link.
+  There is no commercial/ folder either.
+
+  All links are relative, so this works at the repo root or inside a
+  subfolder. If you move a prototype, update the href on its card below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exterior to Interior UX Prototypes</title>
+<style>
+  :root{
+    --bg:#0b0f16;
+    --card:rgba(255,255,255,.045);
+    --card-hover:rgba(255,255,255,.085);
+    --line:rgba(255,255,255,.10);
+    --text:#f2f5f9;
+    --muted:#8d9bb0;
+    --accent:#5aa9ff;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--font);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    min-height:100dvh;            /* accounts for mobile browser chrome */
+    display:flex;align-items:center;justify-content:center;
+    padding:32px 24px;position:relative;overflow-x:hidden;
+  }
+  /* soft light from the top, so the page isn't a flat black rectangle */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;
+    background:
+      radial-gradient(900px 520px at 50% -10%, rgba(90,169,255,.16), transparent 70%),
+      radial-gradient(600px 400px at 85% 105%, rgba(120,90,255,.10), transparent 70%);
+  }
+
+  /* narrower again now the cards are a title and a chevron: at 1080 the two
+     columns stretched into mostly empty space */
+  main{width:100%;max-width:840px;position:relative}
+
+  /* 34px rather than the 14px it carried under the subhead: the title now sits
+     directly above the flow board and has to hold that gap on its own */
+  h1{
+    font-size:clamp(30px,6vw,44px);line-height:1.1;letter-spacing:-.03em;
+    font-weight:700;margin:0 0 34px;
+  }
+
+  /* one column, not two: a lone card in a two-up grid reads as a card with a
+     gap where its pair used to be */
+  ul{list-style:none;margin:0;padding:0;
+     display:grid;grid-template-columns:1fr;gap:12px;align-items:stretch}
+  li{display:flex}
+  .group{display:flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:14px}
+  .group svg{width:17px;height:17px;flex:none;stroke:currentColor;stroke-width:1.8;fill:none;
+    stroke-linecap:round;stroke-linejoin:round}
+
+  a.card{
+    display:flex;align-items:center;gap:18px;width:100%;
+    padding:22px 24px;border-radius:16px;text-decoration:none;color:inherit;
+    background:var(--card);border:1px solid var(--line);
+    transition:background .18s ease,border-color .18s ease,transform .18s cubic-bezier(.22,1,.36,1);
+  }
+  a.card:hover{background:var(--card-hover);border-color:rgba(255,255,255,.22);transform:translateY(-2px)}
+  a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .badge{
+    width:44px;height:44px;flex:none;border-radius:12px;
+    display:grid;place-items:center;
+    background:linear-gradient(150deg,rgba(90,169,255,.30),rgba(90,169,255,.10));
+    border:1px solid rgba(90,169,255,.35);color:#cfe4ff;
+  }
+  /* glyphs inherit the badge's own colour, so each variant tints itself */
+  .badge svg{width:21px;height:21px;display:block;
+    stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .badge svg .solid{fill:currentColor;stroke:none}
+
+  .txt{min-width:0;flex:1}
+  /* a span, so it needs to be a block to own its line height */
+  .name{display:block;font-size:16.5px;font-weight:650;letter-spacing:-.015em;line-height:1.3}
+
+  .chev{width:18px;height:18px;flex:none;
+    stroke:var(--muted);stroke-width:2;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s,transform .18s}
+  a.card:hover .chev{stroke:var(--text);transform:translateX(3px)}
+
+  /* the flow board sits above the prototypes: context before the artefacts */
+  .flow{
+    display:inline-flex;align-items:center;gap:9px;margin:0 0 34px;
+    padding:11px 16px 11px 13px;border-radius:12px;text-decoration:none;color:inherit;
+    background:var(--card);border:1px solid var(--line);
+    font-size:13.5px;font-weight:600;letter-spacing:-.01em;
+    transition:background .18s ease,border-color .18s ease;
+  }
+  .flow:hover{background:var(--card-hover);border-color:rgba(255,255,255,.22)}
+  .flow:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .flow .ico{width:17px;height:17px;flex:none;stroke:var(--accent);stroke-width:1.9;fill:none;
+    stroke-linecap:round;stroke-linejoin:round}
+  .flow .ext{width:13px;height:13px;flex:none;stroke:var(--muted);stroke-width:2;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;margin-left:2px}
+  .flow:hover .ext{stroke:var(--text)}
+
+  @media (max-width:520px){
+    a.card{padding:18px;gap:14px}
+    .badge{width:38px;height:38px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Exterior to Interior UX Prototypes</h1>
+
+  <a class="flow" href="https://www.figma.com/board/NNso5cirCw6akBW8y13HGX/Splats-Flows?node-id=0-1&amp;t=Pjbpc3GjUAO65Js3-1"
+     target="_blank" rel="noopener noreferrer">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="5" rx="1"/>
+      <rect x="14" y="16" width="7" height="5" rx="1"/>
+      <path d="M6.5 8v5.5a2 2 0 0 0 2 2h9"/>
+    </svg>
+    User flow board
+    <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14 4h6v6"/><path d="M20 4l-8.5 8.5"/>
+      <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>
+    </svg>
+  </a>
+
+  <div class="group">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 11.5 12 4l9 7.5"/>
+      <path d="M5.5 10v10h13V10"/>
+      <path d="M10 20v-5.5h4V20"/>
+    </svg>
+    Residential · community splat
+  </div>
+  <ul>
+    <li>
+      <a class="card a" href="homes/a/index.html">
+        <span class="badge">
+          <!-- three markers: the strategy in one glyph, drawn as the kite the
+               prototypes actually use rather than a generic map pin -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="solid" d="M5.6 6.2l2.3 2.8-2.3 6.6-2.3-6.6z"/>
+            <path class="solid" d="M18.4 6.2l2.3 2.8-2.3 6.6-2.3-6.6z"/>
+            <path class="solid" d="M12 3.2l3 3.6-3 9.2-3-9.2z"/>
+          </svg>
+        </span>
+        <span class="txt">
+          <!-- a home isn't a "space": residential keeps the same framing in its
+               own vocabulary, which also preserves the parcel/asset distinction -->
+          <span class="name">Multi-home communities</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </li>
+  </ul>
+
+</main>
+</body>
+</html>
