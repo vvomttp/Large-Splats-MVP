@@ -3,8 +3,12 @@
   Landing page. One prototype left in this copy, so one card.
 
   Layout, relative to this file:
-      index.html                 ← this page
-      homes/a/index.html         ← residential · multi entry points
+      index.html                                    ← this page
+      homes-ingress/glacier-pointe-listing.html     ← the listing the splat is
+                                                      reached from
+      homes/a/index.html                            ← residential · multi entry points
+
+  Cards run in flow order: the listing page first, the viewer it opens second.
 
   The single-entry card pointed at homes/b/index.html, which was removed from
   the working tree; the card went with it rather than staying as a dead link.
@@ -17,7 +21,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Exterior to Interior UX Prototypes</title>
+<title>Large Community Splats MVP Prototypes</title>
 <style>
   :root{
     --bg:#0b0f16;
@@ -58,8 +62,8 @@
     font-weight:700;margin:0 0 34px;
   }
 
-  /* one column, not two: a lone card in a two-up grid reads as a card with a
-     gap where its pair used to be */
+  /* one column, not two: the cards are a step apart in one flow, and a row
+     reads as a choice between them rather than an order */
   ul{list-style:none;margin:0;padding:0;
      display:grid;grid-template-columns:1fr;gap:12px;align-items:stretch}
   li{display:flex}
@@ -92,6 +96,9 @@
   .txt{min-width:0;flex:1}
   /* a span, so it needs to be a block to own its line height */
   .name{display:block;font-size:16.5px;font-weight:650;letter-spacing:-.015em;line-height:1.3}
+  /* says what built the thing, not what it is — the name already does that */
+  .desc{display:block;margin-top:3px;font-size:13px;font-weight:450;
+    letter-spacing:0;line-height:1.35;color:var(--muted)}
 
   .chev{width:18px;height:18px;flex:none;
     stroke:var(--muted);stroke-width:2;fill:none;
@@ -122,7 +129,7 @@
 </head>
 <body>
 <main>
-  <h1>Exterior to Interior UX Prototypes</h1>
+  <h1>Large Community Splats MVP Prototypes</h1>
 
   <a class="flow" href="https://www.figma.com/board/NNso5cirCw6akBW8y13HGX/Splats-Flows?node-id=0-1&amp;t=Pjbpc3GjUAO65Js3-1"
      target="_blank" rel="noopener noreferrer">
@@ -148,6 +155,24 @@
   </div>
   <ul>
     <li>
+      <a class="card" href="homes-ingress/glacier-pointe-listing.html">
+        <span class="badge">
+          <!-- a listing page with its hero tile filled: the splat is one tile on
+               a page of ordinary listing content, which is the point of it -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="M3 8h18"/>
+            <rect class="solid" x="13" y="10.5" width="6" height="7.5" rx="1"/>
+          </svg>
+        </span>
+        <span class="txt">
+          <span class="name">Homes.com New Community Listing Page Ingress</span>
+          <span class="desc">Ingress prototype from Homes.com with real splat</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </li>
+    <li>
       <a class="card a" href="homes/a/index.html">
         <span class="badge">
           <!-- three markers: the strategy in one glyph, drawn as the kite the
@@ -161,7 +186,8 @@
         <span class="txt">
           <!-- a home isn't a "space": residential keeps the same framing in its
                own vocabulary, which also preserves the parcel/asset distinction -->
-          <span class="name">Multi-home communities</span>
+          <span class="name">Multi-Home Communities</span>
+          <span class="desc">Claude prototype with Three.js</span>
         </span>
         <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
       </a>
